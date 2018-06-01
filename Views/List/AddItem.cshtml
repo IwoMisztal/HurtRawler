@@ -1,0 +1,18 @@
+﻿@using HurtRawler.Models
+@model HurtRawler.Models.Item
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>Dodaj Link</h1>
+    <div>
+        <form method="post">
+        <input asp-for="Link"/>
+        <input type="submit" name="add" value="Dodaj"
+               </form>
+    </div>
+    <a asp-controller="List" asp-action="List">@Html.ActionLink("Wróć", "List")</a>
+</body>
+</html>
