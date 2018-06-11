@@ -16,22 +16,23 @@ namespace HurtRawler.Models
         public CheckAvailability(IItemData itemData)
         {
             _itemData = itemData.GetAll();
-      
             foreach (var i in _itemData)
             {
-                string toCheck = _siteReader.Read(i.Link);
-                if (toCheck == null)
-                {
-                    throw new Exception("Link is Empty");
-                } else if (toCheck.IndexOf("title=\"Produkt dostępny") != -1)
+                    string toCheck = _siteReader.Read(i.Link);
+                    if (toCheck == null)
                     {
-                    i.IsAvailable = true;
-                    } else if (toCheck.IndexOf("batterylow") != -1)
-                    {
-                    i.IsAvailable = false;
+                        throw new Exception("Link is Empty");
                     }
-                //adasd
-            }
+                    else if (toCheck.IndexOf("title=\"Produkt dostępny") != -1)
+                    {
+                        i.IsAvailable = true;
+                    }
+                    else if (toCheck.IndexOf("batterylow") != -1)
+                    {
+                        i.IsAvailable = false;
+                    }
+             }
+            itemData.Save();
         }
     }
 }

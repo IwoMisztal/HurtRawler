@@ -9,7 +9,7 @@ namespace HurtRawler.Services
         
          IQueryable<Item> GetAll();
          Item Add(Item item);
-        void Remove(Item item);
+        void Remove(int id);
         void Save();
     }
 }

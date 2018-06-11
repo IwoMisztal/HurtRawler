@@ -1,4 +1,4 @@
-﻿
+﻿@model HurtRawler.ViewModels.ListViewModel
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,18 +7,30 @@
 <body>
     <h1>List</h1>
     <table>
-        @foreach (var item in Model.List)
+
+        @foreach (var item in Model.AvailableItems)
         {
             <tr>
                 <td>@item.Id</td>
-                <td><a href="@item.Link">@item.Link</a></td>
-                <td>@item.IsAvailable   </td>
+                <td><a style="color: green" href="@item.Link">@item.Link</a></td>
+                <td>@item.IsAvailable</td>
+                <td><a href="List/RemoveItem/@item.Id">Usuń link</a></td>
+            </tr>
+        }
+
+        @foreach (var item in Model.UnAvailableItems)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td><a style="color: red" href="@item.Link">@item.Link</a></td>
+                <td>@item.IsAvailable</td>
+                <td><a href="List/RemoveItem/@item.Id">Usuń link</a></td>
             </tr>
         }
     </table>
-
     <h2>@Model</h2>
     <a asp-action="AddItem">Dodaj Link</a>
     <a asp-action="ClearDb">Wyczyść bazę</a>
+    <a asp-action="UploadFromCsv">Dodaj z atrax.csv</a>
 </body>
 </html>

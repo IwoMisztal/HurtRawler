@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace HurtRawler.Models
 {
     public class Item

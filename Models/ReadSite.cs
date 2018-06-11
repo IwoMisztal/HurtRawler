@@ -14,7 +14,10 @@ namespace HurtRawler.Models
 
         public string Read(string url)
         {
-            str = client.DownloadString(url);
+
+                str = client.DownloadString(url);
+
+            
             return str;
         }
     }

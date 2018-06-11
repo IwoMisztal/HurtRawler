@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HurtRawler.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HurtRawler.Services
 {
@@ -18,9 +19,11 @@ namespace HurtRawler.Services
             return item;
         }
 
-        public void Remove(Item item)
+    
+        public void Remove(int id)
         {
-            _context.Items.Remove(item);
+            Item toRemove = _context.Items.FirstOrDefault(i => i.Id == id);
+            _context.Items.Remove(toRemove);
         }
 
         public void Save()

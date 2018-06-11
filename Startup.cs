@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HurtRawler.Services;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace HurtRawler
 {
@@ -28,6 +30,9 @@ namespace HurtRawler
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IItemData, SqlItemData>();
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<HurtRawlerDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("HurtRawler")));
             services.AddMvc();
         }
